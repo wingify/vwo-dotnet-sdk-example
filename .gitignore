@@ -350,5 +350,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-/Wingify.VWO.Sdk.DemoApp/userProfileMaps.json
-/Wingify.VWO.Sdk.DemoApp/logs.txt
+/VWOSdk.DemoApp/userProfileMaps.json
+/VWOSdk.DemoApp/logs.txt

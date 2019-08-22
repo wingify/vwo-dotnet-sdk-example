@@ -23,17 +23,17 @@ dotnet restore
 2. Update your app with your accountId, sdk-key, campaign-test-key and goal-identifier inside `VWOConfig.cs`
 
 ```c#
-public static long AccountId = <accountId>;          
-public static string SdkKey = <sdkKey>;          
-public static string CampaignTestKey = <campaignTestKey>;          
-public static string GoalIdentifier = <goalIdentifier>;          
+public static long AccountId = <accountId>;
+public static string SdkKey = <sdkKey>;
+public static string CampaignTestKey = <campaignTestKey>;
+public static string GoalIdentifier = <goalIdentifier>;
 
 ```
 
 3. Run application
 
 ```
-dotnet run --project Wingify.VWO.Sdk.DemoApp.csproj
+dotnet run --project VWOSdk.DemoApp/VWOSdk.DemoApp.csproj
 ```
 
 ### LICENSE
