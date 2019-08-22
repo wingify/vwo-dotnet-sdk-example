@@ -8,9 +8,9 @@
         "type": "coreclr",
         "request": "launch",
         "preLaunchTask": "build",
-        "program": "${workspaceFolder}/Wingify.VWO.Sdk.DemoApp/bin/Debug/netcoreapp2.0/Wingify.VWO.Sdk.DemoApp.dll",
+        "program": "${workspaceFolder}/VWOSdk.DemoApp/bin/Debug/netcoreapp2.0/VWOSdk.DemoApp.dll",
         "args": [],
-        "cwd": "${workspaceFolder}/Wingify.VWO.Sdk.DemoApp/",
+        "cwd": "${workspaceFolder}/VWOSdk.DemoApp/",
         "stopAtEntry": false,
         "internalConsoleOptions": "openOnSessionStart",
         "launchBrowser": {
