@@ -1,6 +1,6 @@
-## VWO NetStandard SDK Example
+## VWO .NET SDK Example
 
-[vwo-netstandard-sdk](https://gitlab.com/sidhant.gakhar/vwo-netstandard-sdk) allows you to A/B Test your Website at server-side.
+VWO .NET SDK allows you to A/B Test your Website at server-side.
 
 This repository provides a basic demo of how server-side works with VWO NetStandard SDK.
 
@@ -10,7 +10,7 @@ This repository provides a basic demo of how server-side works with VWO NetStand
 
 ### Documentation
 
-Refer [VWO Official Server-side Documentation](https://developers.vwo.com/reference#server-side-introduction)
+Refer [VWO Official Server-side Documentation](https://github.com/wingify/vwo-dotnet-sdk/blob/master/CONTRIBUTING.md)
 
 ### Scripts
 
