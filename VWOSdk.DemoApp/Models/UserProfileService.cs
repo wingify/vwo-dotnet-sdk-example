@@ -38,9 +38,9 @@ namespace VWOSdk.DemoApp
         {
             string variationName = null;
             if (_userProfileMap.TryGetValue(campaignTestKey, out ConcurrentDictionary<string, string> userMap))
-                 variationName = userMap[userId];
+                userMap.TryGetValue(userId, out variationName);
 
-            if(string.IsNullOrEmpty(variationName) == false)
+            if (string.IsNullOrEmpty(variationName) == false)
                 return new UserProfileMap(userId, campaignTestKey, variationName);
 
             return null;
