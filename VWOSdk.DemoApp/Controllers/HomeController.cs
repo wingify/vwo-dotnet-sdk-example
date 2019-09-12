@@ -15,7 +15,7 @@ namespace VWOSdk.DemoApp.Controllers
 
         private static Random RandomGenerator { get; set; } = new Random();
 
-        private static List<string> Names 
+        private static List<string> Names
             = new List<string>() { "Ashley", "Bill", "Chris", "Dominic", "Emma", "Faizan",
                     "Gimmy", "Harry", "Ian", "John", "King", "Lisa", "Mona", "Nina",
                     "Olivia", "Pete", "Queen", "Robert", "Sarah", "Tierra", "Una",
@@ -28,8 +28,8 @@ namespace VWOSdk.DemoApp.Controllers
         {
             VWO.Configure(LogLevel.DEBUG);
             VWO.Configure(new CustomLogger());
-            SettingsFile = SettingsProvider.GetSettings(VWOConfig.AccountId, VWOConfig.SdkKey);
-            VWOClient = VWO.Instantiate(SettingsFile, isDevelopmentMode: true, userProfileService: new UserProfileService());
+            SettingsFile = SettingsProvider.GetSettingsFile(VWOConfig.AccountId, VWOConfig.SdkKey);
+            VWOClient = VWO.CreateInstance(SettingsFile, isDevelopmentMode: true, userProfileService: new UserProfileService());
         }
 
         [HttpGet]
@@ -47,7 +47,7 @@ namespace VWOSdk.DemoApp.Controllers
                 trackResponse = string.IsNullOrEmpty(activateResponse) ? false : VWOClient.Track(campaignTestKey, userId, goalIdentifier);
             }
             var json = new IndexViewModel(SettingsFile, userId, campaignTestKey, goalIdentifier, activateResponse, getVariationResponse, trackResponse);
-            return View(json);  
+            return View(json);
         }
     }
 }

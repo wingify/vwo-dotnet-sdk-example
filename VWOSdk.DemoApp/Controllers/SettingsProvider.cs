@@ -5,11 +5,11 @@ namespace VWOSdk.DemoApp.Controllers
 {
     public class SettingsProvider
     {
-        public static Settings GetSettings(long accountId, string sdkKey)
+        public static Settings GetSettingsFile(long accountId, string sdkKey)
         {
-            if (accountId == DemoApp.Defaults.AccountId)
+            if (accountId == 123456)
                 return GetSettingsFile("DemoSettingsFile");
-            return VWO.GetSettings(accountId, sdkKey);
+            return VWO.GetSettingsFile(accountId, sdkKey);
         }
 
         private static Settings GetSettingsFile(string filename)
