@@ -11,7 +11,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="VWO.Sdk" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +19,10 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\DemoSettingsFile.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\vwo-dotnet-sdk-master\VWOSdk.NetStandard2.0\VWOSdk.NetStandard2.0.csproj" />
   </ItemGroup>
 
 </Project>

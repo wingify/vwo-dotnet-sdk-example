@@ -8,9 +8,9 @@
         "type": "coreclr",
         "request": "launch",
         "preLaunchTask": "build",
-        "program": "${workspaceFolder}/VWOSdk.DemoApp/bin/Debug/netcoreapp2.0/VWOSdk.DemoApp.dll",
+        "program": "${workspaceFolder}/bin/Debug/netcoreapp2.0/VWOSdk.DemoApp.dll",
         "args": [],
-        "cwd": "${workspaceFolder}/VWOSdk.DemoApp/",
+        "cwd": "${workspaceFolder}",
         "stopAtEntry": false,
         "internalConsoleOptions": "openOnSessionStart",
         "launchBrowser": {

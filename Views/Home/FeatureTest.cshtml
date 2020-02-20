@@ -1,0 +1,66 @@
+@using Newtonsoft.Json;
+@using VWOSdk;
+@using System.Collections.Generic;
+@model ViewModel;
+
+
+<html>
+  <head>
+    <title>VWO server-side Experimentation</title>
+    </head>
+    <body>
+    <div>
+      <h2 class="center  color-blue">VWO Dotnet SDK Example : <strong>@Model.CampaignType</strong></h2>
+      <div class="main-container">
+        <div class="left-container">
+          <h2 class="center  color-grey">Settings</h2>
+          <pre id="settings"><code>@Model.Settings</code></pre>
+        </div>
+
+        <div class="right-container">
+          <div class="half-containers">
+            <h2 class="center  color-grey">Details</h2>
+
+            <div class="center  margin--top">
+              <div>Campaign key - <strong>@Model.CampaignKey</strong></div>
+            </div>
+            <div class="center margin--top">
+              <div>Campaign goal identifier - <strong>@Model.GoalIdentifier</strong></div>
+            </div>
+            <div class="center  margin--top">
+              <div>Custom Variables -</div>
+              <pre><code>@Model.StringifyCustomVariables()</code></pre>
+            </div>
+            <div class="center  margin--top">
+              <div>User ID - <strong>@Model.UserId</strong></div>
+            </div>
+
+            @if (@Model.PartOfCampaign) {
+              <div class="center  margin--top">
+                <div>User became a part of feature test </div>
+              </div>
+            } else {
+              <div class="center  margin--top">
+                <div>User did not become a part of feature test</div>
+              </div>
+            }
+            <div class="half-containers  center">
+              @if (@Model.BooleanVariable != null && @Model.BooleanVariable.GetType().Name == "bool") {
+              <button class="v1">BOOLEAN: @Model.BooleanVariable</button>
+              }
+              @if (@Model.BooleanVariable != null && @Model.IntegerVariable.GetType().Name == "int") {
+              <button class="v1">INTEGER: @Model.IntegerVariable</button>
+              }
+              @if (@Model.BooleanVariable != null && @Model.DoubleVariable.GetType().Name == "double") {
+              <button class="v1">DOUBLE: @Model.DoubleVariable</button>
+              }
+              @if (@Model.BooleanVariable != null && @Model.DoubleVariable.GetType().Name == "string") {
+              <button class="v1">STRING: @Model.StringVariable</button>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

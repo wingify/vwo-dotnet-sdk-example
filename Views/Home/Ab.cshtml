@@ -1,0 +1,62 @@
+@using Newtonsoft.Json;
+@using VWOSdk;
+@model ViewModel;
+
+<html>
+  <head>
+    <title>VWO server-side Experimentation</title>
+  </head>
+  <body>
+    <div>
+      <h2 class="center  color-blue">VWO DotNet SDK Example : <strong>@Model.CampaignKey</strong></h2>
+      <div class="main-container">
+        <div class="left-container">
+          <h2 class="center  color-grey">Settings</h2>
+          <pre id="settings"><code>@Model.Settings</code></pre>
+        </div>
+
+        <div class="right-container">
+          <div class="half-containers">
+            <h2 class="center  color-grey">Details</h2>
+
+            <div class="center  margin--top">
+              <div>Campaign key - <strong>@Model.CampaignKey</strong></div>
+            </div>
+            <div class="center margin--top">
+              <div>Campaign goal identifier - <strong>@Model.GoalIdentifier</strong></div>
+            </div>
+            <div class="center  margin--top">
+              <div>Custom Variables -</div>
+              <pre><code>@Model.StringifyCustomVariables()</code></pre>
+            </div>
+            <div class="center  margin--top">
+              <div>User ID - <strong>@Model.UserId</strong></div>
+            </div>
+
+
+             @if (string.IsNullOrEmpty(Model.GetVariation) == false) { 
+              <div class="center  margin--top">
+                <div>variationAssigned - <strong>@Model.GetVariation</strong></div>
+              </div>
+              } else {
+                <div class="center  margin--top">
+                  <div>did not become a part of campaign</div>
+                </div>
+              }
+          </div>
+          <div class="half-containers  center">
+            @if (@Model.GetVariation == "Control") { 
+              <button class="v1">Control</button>
+            } else if (@Model.GetVariation== "Variation-1") {
+              <button class="v2">Variation 1</button>
+            } else if (@Model.GetVariation== "Variation-2") {
+              <button class="v3">Variation 2</button>
+            } else {
+              <button>Not part</button>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

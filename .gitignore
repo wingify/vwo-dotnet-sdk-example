@@ -350,5 +350,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-/VWOSdk.DemoApp/userProfileMaps.json
+/VWOSdk.DemoApp/userStorageMaps.json
 /VWOSdk.DemoApp/logs.txt

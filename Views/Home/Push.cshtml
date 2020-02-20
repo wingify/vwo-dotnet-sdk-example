@@ -1,0 +1,48 @@
+@using Newtonsoft.Json;
+@using VWOSdk;
+@model ViewModel;
+
+<html>
+  <head>
+    <title>VWO server-side Experimentation</title>
+  </head>
+  <body>
+    <div>
+      <h2 class="center  color-blue">VWO DotNet SDK Example : <strong>PUSH API</strong></h2>
+      <div class="main-container">
+        <div class="left-container">
+          <h2 class="center  color-grey">Settings</h2>
+          <pre id="settings"><code>@Model.Settings</code></pre>
+        </div>
+
+        <div class="right-container">
+          <div class="half-containers">
+            <h2 class="center  color-grey">Details</h2>
+
+            <div class="center  margin--top">
+              <div>Tag Key - <strong>@Model.TagKey</strong></div>
+            </div>
+
+            <div class="center  margin--top">
+              <div>Tag Value - <strong>@Model.TagValue</strong></div>
+            </div>
+
+            <div class="center  margin--top">
+              <div>User ID - <strong>@Model.UserId</strong></div>
+            </div>
+
+            @if (@Model.PartOfCampaign) {
+              <div class="center  margin--top">
+                <div>Data pushed to server successfully</div>
+              </div>
+            } else {
+              <div class="center  margin--top">
+                <div>Failed to push data to the server</div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

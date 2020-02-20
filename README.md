@@ -25,7 +25,7 @@ dotnet restore
 ```c#
 public static long AccountId = <accountId>;
 public static string SdkKey = <sdkKey>;
-public static string CampaignTestKey = <campaignTestKey>;
+public static string CampaignKey = <CampaignKey>;
 public static string GoalIdentifier = <goalIdentifier>;
 
 ```
