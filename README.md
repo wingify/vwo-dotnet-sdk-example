@@ -20,13 +20,47 @@ Refer [VWO Official Server-side Documentation](https://github.com/wingify/vwo-do
 dotnet restore
 ```
 
-2. Update your app with your accountId, sdk-key, campaign-test-key and goal-identifier inside `VWOConfig.cs`
+2. Update your app with essential params inside `VWOConfig.cs`
 
 ```c#
-public static long AccountId = <accountId>;
-public static string SdkKey = <sdkKey>;
-public static string CampaignKey = <CampaignKey>;
-public static string GoalIdentifier = <goalIdentifier>;
+using System.Collections.Generic;
+
+namespace VWOSdk.DemoApp
+{
+    public class VWOConfig
+    {
+        internal static class SDK {
+            public static long AccountId = "";          ////Assign actual value;
+            public static string SdkKey = "";
+        }
+        internal static class ABCampaignSettings {        ////Assign actual value;
+            public static string CampaignKey = "";          ////Assign actual value;
+            public static string GoalIdentifier = "";          ////Assign actual value;
+            public static Dictionary<string, dynamic> CustomVariables = "";
+            public static Dictionary<string, dynamic> RevenueVariables = "";
+        }
+
+        internal static class PushData {
+            public static string TagKey = "";
+            public static dynamic TagValue = "";
+        }
+
+        internal static class FeatureRolloutData {
+            public static string CampaignKey = "";
+            public static Dictionary<string, dynamic> CustomVariables = new Dictionary<string, dynamic>();
+        }
+
+        internal static class FeatureTestData {
+            public static string CampaignKey = "";
+            public static string GoalIdentifier = "";
+            public static Dictionary<string, dynamic> RevenueAndCustomVariables = new Dictionary<string, dynamic>();
+            public static string StringVariableKey = "";
+            public static string IntegerVariableKey = "";
+            public static string DoubleVariableKey = "";
+            public static string BooleanVariableKey = "";
+        }
+    }
+}
 
 ```
 

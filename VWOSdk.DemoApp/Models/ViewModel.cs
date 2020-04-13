@@ -59,9 +59,9 @@ namespace VWOSdk.DemoApp.Models
             this.BooleanVariable = booleanVariable;
             this.DoubleVariable = doubleVariable;
         }
-        
+
         public Settings CurrentSettingsFile { get; set; }
-        
+
         public string Settings { get
             {
                 if(CurrentSettingsFile != null)
@@ -91,7 +91,7 @@ namespace VWOSdk.DemoApp.Models
         public dynamic TagValue { get; set; }
 
         public bool PartOfCampaign { get; set; }
-        
+
         public string GetVariation {
             get; set;
         }
@@ -105,11 +105,11 @@ namespace VWOSdk.DemoApp.Models
         {
             get; set;
         }
-        
+
         public string UserId { get; set; }
 
         public Dictionary<string, dynamic> CustomVariables { get; set; }
-        
+
         static string GetSha256Hash(SHA256 shaHash, string input)
         {
             // Convert the input string to a byte array and compute the hash.
@@ -119,7 +119,7 @@ namespace VWOSdk.DemoApp.Models
             // and create a string.
             StringBuilder sBuilder = new StringBuilder();
 
-            // Loop through each byte of the hashed data 
+            // Loop through each byte of the hashed data
             // and format each one as a hexadecimal string.
             for (int i = 0; i < data.Length; i++)
             {

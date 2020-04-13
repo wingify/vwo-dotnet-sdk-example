@@ -28,8 +28,8 @@ namespace VWOSdk.DemoApp.Controllers
         {
             VWO.Configure(LogLevel.DEBUG);
             VWO.Configure(new CustomLogger());
-            SettingsFile = SettingsProvider.GetSettingsFile(VWOConfig.ABCampaignSettings.AccountId, VWOConfig.ABCampaignSettings.SdkKey);
-            VWOClient = VWO.CreateInstance(SettingsFile, isDevelopmentMode: false, userStorageService: new UserStorageService());
+            SettingsFile = SettingsProvider.GetSettingsFile(VWOConfig.SDK.AccountId, VWOConfig.SDK.SdkKey);
+            VWOClient = VWO.Launch(SettingsFile, isDevelopmentMode: false, userStorageService: new UserStorageService());
         }
 
         [HttpGet]
@@ -44,34 +44,34 @@ namespace VWOSdk.DemoApp.Controllers
             var userId = string.IsNullOrEmpty(user) ? GetRandomName() : user;
             var CampaignKey = VWOConfig.ABCampaignSettings.CampaignKey;
             var goalIdentifier = VWOConfig.ABCampaignSettings.GoalIdentifier;
-            var customVariables = VWOConfig.ABCampaignSettings.CustomVariables;
-            var revenueVariables = VWOConfig.ABCampaignSettings.RevenueVariables;
+            var options = VWOConfig.ABCampaignSettings.Options;
+            var revenueConfig = VWOConfig.ABCampaignSettings.revenueConfig;
             string activateResponse = null, getVariationResponse = null;
             bool trackResponse = false;
             if (VWOClient != null)
             {
-                activateResponse = VWOClient.Activate(CampaignKey, userId);
-                getVariationResponse = string.IsNullOrEmpty(activateResponse) ? activateResponse : VWOClient.GetVariation(CampaignKey, userId);
-                trackResponse = string.IsNullOrEmpty(activateResponse) ? false : VWOClient.Track(CampaignKey, userId, goalIdentifier, revenueVariables);
+                activateResponse = VWOClient.Activate(CampaignKey, userId, options);
+                getVariationResponse = string.IsNullOrEmpty(activateResponse) ? activateResponse : VWOClient.GetVariationName(CampaignKey, userId, options);
+                trackResponse = string.IsNullOrEmpty(activateResponse) ? false : VWOClient.Track(CampaignKey, userId, goalIdentifier, revenueConfig);
             }
-            var json = new ViewModel(SettingsFile, userId, CampaignKey, goalIdentifier, activateResponse, getVariationResponse, trackResponse, customVariables);
+            var json = new ViewModel(SettingsFile, userId, CampaignKey, goalIdentifier, activateResponse, getVariationResponse, trackResponse, options);
             return View(json);
         }
 
-        
+
         [HttpGet]
         public IActionResult FeatureRollout([FromQuery] string user)
         {
             var userId = string.IsNullOrEmpty(user) ? GetRandomName() : user;
-            var customVariables = VWOConfig.FeatureRolloutData.CustomVariables;
+            var options = VWOConfig.FeatureRolloutData.Options;
             string CampaignKey = VWOConfig.FeatureRolloutData.CampaignKey;
             string campaignType = "Feature-rollout";
             bool activateResponse = false;
             if (VWOClient != null)
             {
-                activateResponse = VWOClient.IsFeatureEnabled(CampaignKey, userId, customVariables);
+                activateResponse = VWOClient.IsFeatureEnabled(CampaignKey, userId, options);
             }
-            var json = new ViewModel(SettingsFile, userId, CampaignKey, campaignType, activateResponse, customVariables);
+            var json = new ViewModel(SettingsFile, userId, CampaignKey, campaignType, activateResponse, options);
             return View(json);
         }
 
@@ -79,7 +79,7 @@ namespace VWOSdk.DemoApp.Controllers
         public IActionResult FeatureTest([FromQuery] string user)
         {
             var userId = string.IsNullOrEmpty(user) ? GetRandomName() : user;
-            var revenueAndCustomVariables = VWOConfig.FeatureTestData.RevenueAndCustomVariables;
+            var options = VWOConfig.FeatureTestData.Options;
             string stringVariableKey = VWOConfig.FeatureTestData.StringVariableKey;
             string integerVariableKey = VWOConfig.FeatureTestData.IntegerVariableKey;
             string booleanVariableKey = VWOConfig.FeatureTestData.BooleanVariableKey;
@@ -94,19 +94,19 @@ namespace VWOSdk.DemoApp.Controllers
             dynamic doubleVariable = null;
             if (VWOClient != null)
             {
-                
-                activateResponse = VWOClient.IsFeatureEnabled(CampaignKey, userId, revenueAndCustomVariables);
+
+                activateResponse = VWOClient.IsFeatureEnabled(CampaignKey, userId, options);
                 if (activateResponse) {
-                  VWOClient.Track(CampaignKey, userId, goalIdentifier, revenueAndCustomVariables);
+                  VWOClient.Track(CampaignKey, userId, goalIdentifier, options);
                 }
-                stringVariable = VWOClient.GetFeatureVariableValue(CampaignKey, stringVariableKey, userId, revenueAndCustomVariables);
-                integerVariable = VWOClient.GetFeatureVariableValue(CampaignKey, integerVariableKey, userId, revenueAndCustomVariables);
-                booleanVariable = VWOClient.GetFeatureVariableValue(CampaignKey, booleanVariableKey, userId, revenueAndCustomVariables);
-                doubleVariable = VWOClient.GetFeatureVariableValue(CampaignKey, doubleVariableKey, userId, revenueAndCustomVariables);
+                stringVariable = VWOClient.GetFeatureVariableValue(CampaignKey, stringVariableKey, userId, options);
+                integerVariable = VWOClient.GetFeatureVariableValue(CampaignKey, integerVariableKey, userId, options);
+                booleanVariable = VWOClient.GetFeatureVariableValue(CampaignKey, booleanVariableKey, userId, options);
+                doubleVariable = VWOClient.GetFeatureVariableValue(CampaignKey, doubleVariableKey, userId, options);
             }
-            var json = new ViewModel(SettingsFile, userId, CampaignKey, goalIdentifier, campaignType, activateResponse, revenueAndCustomVariables, stringVariable, integerVariable, booleanVariable, doubleVariable);
+            var json = new ViewModel(SettingsFile, userId, CampaignKey, goalIdentifier, campaignType, activateResponse, options, stringVariable, integerVariable, booleanVariable, doubleVariable);
             return View(json);
-        }                   
+        }
 
         [HttpGet]
         public IActionResult Push([FromQuery] string user)
