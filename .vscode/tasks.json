@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/VWOSdk.DemoApp.csproj",
+                "${workspaceFolder}/VWOSdk.DemoApp/VWOSdk.DemoApp.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

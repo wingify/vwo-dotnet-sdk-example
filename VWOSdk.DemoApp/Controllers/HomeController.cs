@@ -16,10 +16,14 @@ namespace VWOSdk.DemoApp.Controllers
         private static Random RandomGenerator { get; set; } = new Random();
 
         private static List<string> Names
-            = new List<string>() { "Ashley", "Bill", "Chris", "Dominic", "Emma", "Faizan",
-                    "Gimmy", "Harry", "Ian", "John", "King", "Lisa", "Mona", "Nina",
-                    "Olivia", "Pete", "Queen", "Robert", "Sarah", "Tierra", "Una",
-                    "Varun", "Will", "Xin", "You", "Zeba" };
+            = new List<string>() {
+               "Ashley", "Bill", "Chris", "Dominic", "Emma", "Faizan",
+                "Gimmy", "Harry", "Ian", "John", "King", "Lisa", "Mona", "Nina",
+                "Olivia", "Pete", "Queen", "Robert", "Sarah", "Tierra", "Una",
+                "Varun", "Will", "Xin", "You", "Zeba",
+                "Varun",  "You", "Faizan", "Ashley", "Bill", "Chris", "Dominic",
+                "Rohit" , "Bob"
+               };
 
         private static Settings SettingsFile { get; set; }
         private static IVWOClient VWOClient { get; }
@@ -45,14 +49,13 @@ namespace VWOSdk.DemoApp.Controllers
             var CampaignKey = VWOConfig.ABCampaignSettings.CampaignKey;
             var goalIdentifier = VWOConfig.ABCampaignSettings.GoalIdentifier;
             var options = VWOConfig.ABCampaignSettings.Options;
-            var revenueConfig = VWOConfig.ABCampaignSettings.revenueConfig;
             string activateResponse = null, getVariationResponse = null;
             bool trackResponse = false;
             if (VWOClient != null)
             {
                 activateResponse = VWOClient.Activate(CampaignKey, userId, options);
                 getVariationResponse = string.IsNullOrEmpty(activateResponse) ? activateResponse : VWOClient.GetVariationName(CampaignKey, userId, options);
-                trackResponse = string.IsNullOrEmpty(activateResponse) ? false : VWOClient.Track(CampaignKey, userId, goalIdentifier, revenueConfig);
+                trackResponse = string.IsNullOrEmpty(activateResponse) ? false : VWOClient.Track(CampaignKey, userId, goalIdentifier, options);
             }
             var json = new ViewModel(SettingsFile, userId, CampaignKey, goalIdentifier, activateResponse, getVariationResponse, trackResponse, options);
             return View(json);

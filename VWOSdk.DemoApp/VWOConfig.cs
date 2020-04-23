@@ -5,14 +5,13 @@ namespace VWOSdk.DemoApp
     public class VWOConfig
     {
         internal static class SDK {
-            public static long AccountId = 1;          ////Assign actual value;
-            public static string SdkKey = "";
+            public static long AccountId = Defaults.AccountId;         ////Assign actual value;
+            public static string SdkKey = Defaults.SdkKey;
         }
         internal static class ABCampaignSettings {       ////Assign actual value;
-            public static string CampaignKey = "";          ////Assign actual value;
-            public static string GoalIdentifier = "";          ////Assign actual value;
-            public static Dictionary<string, dynamic> Options = new Dictionary<string, dynamic>();
-            public static Dictionary<string, dynamic> revenueConfig = new Dictionary<string, dynamic>();
+            public static string CampaignKey = Defaults.CampaignKey;          ////Assign actual value;
+            public static string GoalIdentifier = Defaults.GoalIdentifier;          ////Assign actual value;
+            public static Dictionary<string, dynamic> Options = Defaults.Options;      ////Assign actual value;
         }
 
         internal static class PushData {
