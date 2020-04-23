@@ -19,7 +19,10 @@ namespace VWOSdk.DemoApp.Controllers
             = new List<string>() { "Ashley", "Bill", "Chris", "Dominic", "Emma", "Faizan",
                     "Gimmy", "Harry", "Ian", "John", "King", "Lisa", "Mona", "Nina",
                     "Olivia", "Pete", "Queen", "Robert", "Sarah", "Tierra", "Una",
-                    "Varun", "Will", "Xin", "You", "Zeba" };
+                    "Varun", "Will", "Xin", "You", "Zeba",
+                  //whitelisted
+                "Varun",  "You", "Faizan",    "Rohit" , "Bob"
+               };
 
         private static Settings SettingsFile { get; set; }
         private static IVWOClient VWOClient { get; }
