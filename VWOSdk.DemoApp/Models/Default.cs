@@ -8,11 +8,27 @@ namespace VWOSdk.DemoApp
         public readonly static string SdkKey = "";
         public readonly static string CampaignKey = "";          ////Assign actual value;
         public readonly static string GoalIdentifier = "";          ////Assign actual value;
-        public readonly static Dictionary<string, dynamic> RevenueVariables = new Dictionary<string, dynamic>
+        public readonly static Dictionary<string, dynamic> Options = new Dictionary<string, dynamic>()
         {
-            {"revenue_value", 10}
+            {
+                "revenue_value", 10
+            },
+            {
+              "customVariables", new Dictionary<string, dynamic>()
+              {
+                  {
+                    "gender", "f"
+                  }
+              }
+            },
+            {
+              "variationTargettingVariable", new Dictionary<string, dynamic>()
+              {
+                  {
+                      "abcd", 1
+                  }
+              }
+            }
         };
-        public readonly static Dictionary<string, dynamic> CustomVariables = new Dictionary<string, dynamic>{};
-        public readonly static Dictionary<string, dynamic> VariationTargettingVariable = new Dictionary<string, dynamic>{};
     }
 }

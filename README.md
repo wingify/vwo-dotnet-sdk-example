@@ -36,8 +36,7 @@ namespace VWOSdk.DemoApp
         internal static class ABCampaignSettings {        ////Assign actual value;
             public static string CampaignKey = "";          ////Assign actual value;
             public static string GoalIdentifier = "";          ////Assign actual value;
-            public static Dictionary<string, dynamic> CustomVariables = "";
-            public static Dictionary<string, dynamic> RevenueVariables = "";
+            public static Dictionary<string, dynamic> Options = new Dictionary<string, dynamic>();
         }
 
         internal static class PushData {
@@ -47,13 +46,13 @@ namespace VWOSdk.DemoApp
 
         internal static class FeatureRolloutData {
             public static string CampaignKey = "";
-            public static Dictionary<string, dynamic> CustomVariables = new Dictionary<string, dynamic>();
+            public static Dictionary<string, dynamic> Options = new Dictionary<string, dynamic>();
         }
 
         internal static class FeatureTestData {
             public static string CampaignKey = "";
             public static string GoalIdentifier = "";
-            public static Dictionary<string, dynamic> RevenueAndCustomVariables = new Dictionary<string, dynamic>();
+            public static Dictionary<string, dynamic> Options = new Dictionary<string, dynamic>();
             public static string StringVariableKey = "";
             public static string IntegerVariableKey = "";
             public static string DoubleVariableKey = "";
