@@ -7,7 +7,7 @@ namespace VWOSdk.DemoApp
         public readonly static long AccountId = 1;
         public readonly static string SdkKey = "";
         public readonly static string CampaignKey = "";          ////Assign actual value;
-        public readonly static string GoalIdentifier = "";          ////Assign actual value;
+        public readonly static string GoalIdentifier = "custom";          ////Assign actual value;
         public readonly static Dictionary<string, dynamic> Options = new Dictionary<string, dynamic>()
         {
             {

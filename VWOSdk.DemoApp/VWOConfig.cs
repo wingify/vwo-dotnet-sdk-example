@@ -11,7 +11,7 @@ namespace VWOSdk.DemoApp
         internal static class ABCampaignSettings {       ////Assign actual value;
             public static string CampaignKey = Defaults.CampaignKey;          ////Assign actual value;
             public static string GoalIdentifier = Defaults.GoalIdentifier;          ////Assign actual value;
-            public static string Options = Defaults.Options;      ////Assign actual value;
+            public static Dictionary<string, dynamic> Options = Defaults.Options;      ////Assign actual value;
         }
 
         internal static class PushData {
