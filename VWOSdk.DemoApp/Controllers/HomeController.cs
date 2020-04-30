@@ -17,13 +17,12 @@ namespace VWOSdk.DemoApp.Controllers
 
         private static List<string> Names
             = new List<string>() {
-               // "Ashley", "Bill", "Chris", "Dominic", "Emma", "Faizan",
-               //      "Gimmy", "Harry", "Ian", "John", "King", "Lisa", "Mona", "Nina",
-               //      "Olivia", "Pete", "Queen", "Robert", "Sarah", "Tierra", "Una",
-               //      "Varun", "Will", "Xin", "You", "Zeba",
-                  //whitelisted
+               "Ashley", "Bill", "Chris", "Dominic", "Emma", "Faizan",
+                "Gimmy", "Harry", "Ian", "John", "King", "Lisa", "Mona", "Nina",
+                "Olivia", "Pete", "Queen", "Robert", "Sarah", "Tierra", "Una",
+                "Varun", "Will", "Xin", "You", "Zeba",
                 "Varun",  "You", "Faizan", "Ashley", "Bill", "Chris", "Dominic",
-                     // "Rohit" , "Bob"
+                "Rohit" , "Bob"
                };
 
         private static Settings SettingsFile { get; set; }
