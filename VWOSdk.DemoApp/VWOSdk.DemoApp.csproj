@@ -22,6 +22,6 @@
   </ItemGroup>
 
    <ItemGroup>
-     <ProjectReference Include="..\..\vwo-dotnet-sdk\VWOSdk.NetStandard2.0\VWOSdk.NetStandard2.0.csproj" />
+     <ProjectReference Include="..\..\vwo-dotnet-sdk-master\VWOSdk.NetStandard2.0\VWOSdk.NetStandard2.0.csproj" />
    </ItemGroup>
 </Project>
