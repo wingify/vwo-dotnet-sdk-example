@@ -2,7 +2,7 @@
 
 VWO .NET SDK allows you to A/B Test your Website at server-side.
 
-This repository provides a basic demo of how server-side works with VWO NetStandard SDK.
+This repository provides a basic demo of how FullStack works with VWO NetStandard SDK.
 
 ### Requirements
 
@@ -10,8 +10,7 @@ This repository provides a basic demo of how server-side works with VWO NetStand
 
 ### Documentation
 
-Refer [VWO Official Server-side Documentation](https://github.com/wingify/vwo-dotnet-sdk/blob/master/CONTRIBUTING.md)
-
+Refer [VWO Official FullStack Documentation](https://developers.vwo.com/reference#fullstack-introduction)
 ### Scripts
 
 1. Install dependencies
