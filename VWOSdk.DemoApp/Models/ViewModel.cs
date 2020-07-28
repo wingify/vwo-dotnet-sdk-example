@@ -130,16 +130,23 @@ namespace VWOSdk.DemoApp.Models
             return sBuilder.ToString().Substring(0, 6);
         }
 
-        public string StringifyCustomVariables()
+        public string StringifyCustomVariables(Dictionary<string, dynamic>  customVariables = null)
         {
-            if (this.CustomVariables.Count == 0) {
+            customVariables = customVariables ?? this.CustomVariables; 
+            if (customVariables.Count == 0) {
                 return "";
             }
             StringBuilder builder = new StringBuilder();
             builder.Append("{\n  ");
-            foreach (var pair in this.CustomVariables)
+            foreach (var pair in customVariables)
             {
-                builder.Append("\"" + pair.Key + "\"").Append(": ").Append("\"" + pair.Value + "\"").Append(",\n  ");
+                System.Type t = pair.Value.GetType();
+                bool isDict = t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Dictionary<,>);
+                if (isDict) {
+                    builder.Append("\"" + pair.Key + "\"").Append(": ").Append("\"" + this.StringifyCustomVariables(pair.Value) + "\"").Append(",\n  ");
+                } else {
+                    builder.Append("\"" + pair.Key + "\"").Append(": ").Append("\"" + pair.Value + "\"").Append(",\n  ");
+                }
             }
             builder.Length -= 4;
             builder.Append("\n}");

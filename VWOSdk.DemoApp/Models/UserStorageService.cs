@@ -8,7 +8,7 @@ namespace VWOSdk.DemoApp
     public class UserStorageService : IUserStorageService
     {
         private static string path = @"userStorageMaps.json";
-        private ConcurrentDictionary<string, ConcurrentDictionary<string, string>> _userStorageMap = new ConcurrentDictionary<string, ConcurrentDictionary<string, string>>();
+        private ConcurrentDictionary<string, ConcurrentDictionary<string, Dictionary<string, string>>> _userStorageMap = new ConcurrentDictionary<string, ConcurrentDictionary<string, Dictionary<string, string>>>();
 
         public UserStorageService()
         {
@@ -23,37 +23,44 @@ namespace VWOSdk.DemoApp
             try
             {
                 string json = System.IO.File.ReadAllText(path);
-                var data = Newtonsoft.Json.JsonConvert.DeserializeObject<ConcurrentDictionary<string, ConcurrentDictionary<string, string>>>(json);
+                var data = Newtonsoft.Json.JsonConvert.DeserializeObject<ConcurrentDictionary<string, ConcurrentDictionary<string, Dictionary<string, string>>>>(json);
                 if (data != null)
                 {
-                    _userStorageMap = new ConcurrentDictionary<string, ConcurrentDictionary<string, string>>(data);
+                    _userStorageMap = new ConcurrentDictionary<string, ConcurrentDictionary<string, Dictionary<string, string>>>(data);
                 }
                 else
-                    _userStorageMap = new ConcurrentDictionary<string, ConcurrentDictionary<string, string>>();
+                    _userStorageMap = new ConcurrentDictionary<string, ConcurrentDictionary<string, Dictionary<string, string>>>();
             }
             catch { }
         }
 
         public UserStorageMap Get(string userId, string CampaignKey)
         {
-            string variationName = null;
-            if (_userStorageMap.TryGetValue(CampaignKey, out ConcurrentDictionary<string, string> userMap))
-                userMap.TryGetValue(userId, out variationName);
+            Dictionary<string, string> userDict = null;
+            if (_userStorageMap.TryGetValue(CampaignKey, out ConcurrentDictionary<string, Dictionary<string, string>> userMap))
+                userMap.TryGetValue(userId, out userDict);
 
-            if (string.IsNullOrEmpty(variationName) == false)
-                return new UserStorageMap(userId, CampaignKey, variationName);
+            if (userDict != null)
+                return new UserStorageMap(userId, CampaignKey, userDict["VariationName"], userDict["GoalIdentifier"]);
 
             return null;
         }
 
         public void Set(UserStorageMap userStorageMap)
         {
-            if (_userStorageMap.TryGetValue(userStorageMap.CampaignKey, out ConcurrentDictionary<string, string> userMap) == false)
+            if (_userStorageMap.TryGetValue(userStorageMap.CampaignKey, out ConcurrentDictionary<string, Dictionary<string, string>> userMap) == false)
             {
-                userMap = new ConcurrentDictionary<string, string>();
+                userMap = new ConcurrentDictionary<string, Dictionary<string, string>>();
                 _userStorageMap[userStorageMap.CampaignKey] = userMap;
             }
-            userMap[userStorageMap.UserId] = userStorageMap.VariationName;
+            if (userMap.ContainsKey(userStorageMap.UserId) && userMap[userStorageMap.UserId] != null && userStorageMap.GoalIdentifier != null ) {
+                userMap[userStorageMap.UserId]["GoalIdentifier"] = userStorageMap.GoalIdentifier;
+            } else {
+                userMap[userStorageMap.UserId] = new Dictionary<string, string>() {
+                    { "VariationName", userStorageMap.VariationName },
+                    { "GoalIdentifier", userStorageMap.GoalIdentifier }
+                };
+            }
             SaveAsync();
         }
 
