@@ -354,3 +354,4 @@ MigrationBackup/
 /VWOSdk.DemoApp/logs.txt
 
 .DS_STORE
+/VWOSdk.DemoApp/Resources/SettingsFile.json

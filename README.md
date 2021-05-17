@@ -16,10 +16,11 @@ Refer [VWO Official FullStack Documentation](https://developers.vwo.com/referenc
 1. Install dependencies
 
 ```
-dotnet restore
+cd VWOSdk.DemoApp;
+dotnet restore;
 ```
 
-2. Update your app with essential params inside `VWOConfig.cs`
+2. Update your app with essential params inside `VWOSdk.DemoApp/VWOConfig.cs`
 
 ```c#
 using System.Collections.Generic;
@@ -73,7 +74,7 @@ dotnet run --project VWOSdk.DemoApp/VWOSdk.DemoApp.csproj
 ```text
     MIT License
 
-    Copyright (c) 2019 Wingify Software Pvt. Ltd.
+    Copyright (c) 2019-2021 Wingify Software Pvt. Ltd.
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
