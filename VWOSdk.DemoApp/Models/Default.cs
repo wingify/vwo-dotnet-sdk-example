@@ -11,7 +11,7 @@ namespace VWOSdk.DemoApp
         //SettingsFile Path
         public readonly static string SettingsFilePath = @"Resources/DemoSettingsFile.json";
         //Webhook
-        public readonly static string WebhookSecretKey = "your-Webhook-Secret-Key";
+        public readonly static string WebhookSecretKey = "";//your-Webhook-Secret-Key
         //Batch Event
         public readonly static int? EventsPerRequest = 6; //default 100
         public readonly static int? RequestTimeInterval = 60;  //default:- 10 * 60(secs) = 600 secs i.e. 10 minutes

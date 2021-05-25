@@ -10,7 +10,7 @@ This repository provides a basic demo of how FullStack works with VWO NetStandar
 
 ### Documentation
 
-Refer [VWO Official FullStack Documentation](https://developers.vwo.com/reference#fullstack-introduction)
+Refer [VWO Official FullStack Documentation](https://developers.vwo.com/docs/fullstack-overview)
 ### Scripts
 
 1. Install dependencies

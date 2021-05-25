@@ -28,24 +28,26 @@ namespace VWOSdk.DemoApp.Controllers
                };
 
         private static Settings SettingsFile { get; set; }
-        public static IVWOClient VWOClient { get; set; }
-
-        private static IFlushInterface FInterface { get; set; }
-
+        private static IVWOClient VWOClient { get; set; }
         static HomeController()
         {
             VWO.Configure(LogLevel.DEBUG);
             VWO.Configure(new CustomLogger());
+            CustomLogger logger = new CustomLogger();
             SettingsFile = SettingsProvider.GetSettingsFile(VWOConfig.SDK.AccountId, VWOConfig.SDK.SdkKey);
             BatchEventData _batchData = new BatchEventData();
             _batchData.EventsPerRequest = Defaults.EventsPerRequest;
             _batchData.RequestTimeInterval = Defaults.RequestTimeInterval;
             _batchData.FlushCallback = new FlushCallback();
-            CustomLogger logger = new CustomLogger();
-            logger.WriteLog(LogLevel.DEBUG, "BatchEventData : EventsPerRequest-" + Defaults.EventsPerRequest.ToString() +
-                ", RequestTimeInterval:" + Defaults.RequestTimeInterval);
+            //logger.WriteLog(LogLevel.DEBUG, "BatchEventData : EventsPerRequest-" + Defaults.EventsPerRequest.ToString() +", RequestTimeInterval:" + Defaults.RequestTimeInterval);          
+            //VWOClient = VWO.Launch(SettingsFile, batchData: _batchData);
 
-            VWOClient = VWO.Launch(SettingsFile, batchData: _batchData);         
+            //logger.WriteLog(LogLevel.DEBUG, "HookManager : IntegrationEventListener onEvent requested ");
+            //VWOClient = VWO.Launch(SettingsFile, batchData: _batchData, integrations: new HookManager(){HookCallback = new HookCallback()});
+
+            logger.WriteLog(LogLevel.DEBUG, "BatchEventData,userStorageService,isDevelopmentMode,integrations,shouldTrackReturningUser passed in SDK");
+            VWOClient = VWO.Launch(SettingsFile, batchData: _batchData, userStorageService: new UserStorageService(),
+                isDevelopmentMode: false, integrations: new HookManager() { HookCallback = new HookCallback() }, shouldTrackReturningUser: false);
         }
 
         [HttpGet]
@@ -154,13 +156,11 @@ namespace VWOSdk.DemoApp.Controllers
             {
                 CustomLogger logger = new CustomLogger();
                 logger.WriteLog(LogLevel.DEBUG, "manual flushEvent called ");
-                bool response = VWOClient.flushEvent();
+                bool response = VWOClient.FlushEvents();
                 logger.WriteLog(LogLevel.DEBUG, "flushEvent response: " + response.ToString());
             }
             return View("Index");
         }
-
-
         [Route("/webhook")]
         [HttpPost]
         public async Task<string> webhook()

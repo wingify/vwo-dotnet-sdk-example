@@ -11,20 +11,14 @@ namespace VWOSdk.DemoApp.Controllers
        
         private static string _SettingsFilePath = Defaults.SettingsFilePath;     
         public static Settings GetSettingsFile(long accountId, string sdkKey)
-        {
-
-            if (System.IO.File.Exists(_SettingsFilePath) == false)
+        {                        
+            if (File.Exists(_SettingsFilePath) == false)
             {
-                System.IO.File.Create(_SettingsFilePath).Close();
-                Settings SettingsFile = VWO.GetSettingsFile(accountId, sdkKey);
+                File.Create(_SettingsFilePath).Close();
+            }
+            Settings SettingsFile = VWO.GetSettingsFile(accountId, sdkKey);
                 _ = SaveAsync(SettingsFile);
-
-                return SettingsFile;
-            }
-            else
-            {
-                return GetSettingsFile();
-            }
+                return SettingsFile;           
         }
 
         public static async Task<Settings> GetAndUpdateSettingsFile(long accountId, string sdkKey)
