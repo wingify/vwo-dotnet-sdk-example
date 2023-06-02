@@ -1,53 +1,47 @@
 ﻿using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
+
 
 namespace VWOSdk.DemoApp.Controllers
 {
     public class SettingsProvider
     {
+
+       
+        private static string _SettingsFilePath = Defaults.SettingsFilePath;     
         public static Settings GetSettingsFile(long accountId, string sdkKey)
-        {
-            if (accountId == 123456)
-                return GetSettingsFile("DemoSettingsFile");
-            return VWO.GetSettingsFile(accountId, sdkKey);
+        {                        
+            if (File.Exists(_SettingsFilePath) == false)
+            {
+                File.Create(_SettingsFilePath).Close();
+            }
+            Settings SettingsFile = VWO.GetSettingsFile(accountId, sdkKey);
+                _ = SaveAsync(SettingsFile);
+                return SettingsFile;           
         }
 
-        private static Settings GetSettingsFile(string filename)
+        public static async Task<Settings> GetAndUpdateSettingsFile(long accountId, string sdkKey)
         {
-            string json = GetJsonText(filename);
+           if (File.Exists(_SettingsFilePath) == false)
+            {
+                File.Create(_SettingsFilePath).Close();
+            }
+            Settings SettingsFile = VWO.GetAndUpdateSettingsFile(accountId, sdkKey);
+            if (SettingsFile != null)
+            {
+                await File.WriteAllTextAsync(_SettingsFilePath, Newtonsoft.Json.JsonConvert.SerializeObject(SettingsFile, Newtonsoft.Json.Formatting.Indented));
+            }
+            return GetSettingsFile();
+        }
+        public static async Task SaveAsync(Settings SettingsFile)
+        {
+            await File.WriteAllTextAsync(_SettingsFilePath, Newtonsoft.Json.JsonConvert.SerializeObject(SettingsFile, Newtonsoft.Json.Formatting.Indented));
+        }
+        private static Settings GetSettingsFile()
+        {
+            string json = File.ReadAllText(_SettingsFilePath);
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Settings>(json);
         }
-
-        private static string GetJsonText(string filename)
-        {
-            string path = null;
-
-            foreach (var resource in Assembly.GetExecutingAssembly().GetManifestResourceNames())
-            {
-                if (resource.Contains("." + filename + "."))
-                {
-                    path = resource;
-                    break;
-                }
-            }
-
-            try
-            {
-                var _assembly = Assembly.GetExecutingAssembly();
-                using (Stream resourceStream = _assembly.GetManifestResourceStream(path))
-                {
-                    if (resourceStream == null)
-                        return null;
-
-                    using (StreamReader reader = new StreamReader(resourceStream))
-                    {
-                        return reader.ReadToEnd();
-                    }
-                }
-            }
-            catch { }
-
-            return null;
-        }
-    }
+    }    
 }
