@@ -65,6 +65,15 @@ namespace VWOSdk.DemoApp.Controllers
             string activateResponse = null, getVariationResponse = null;
             bool trackResponse = false;
 
+            // Get the user agent and IP address from the HTTP request
+            var httpRequest = HttpContext.Request;
+            string userAgent = httpRequest.Headers["User-Agent"]; // This is the user agent string of the client's browser.
+            string userIpAddress = httpRequest.HttpContext.Connection.RemoteIpAddress?.ToString(); // This is the IP address of the client's computer.
+            
+            // Add the user agent and IP address to the Options dictionary
+            options["userAgent"] = !string.IsNullOrEmpty(userAgent) ? userAgent : ""; // This key-value pair will be used to track the user's browser.
+            options["userIpAddress"] = !string.IsNullOrEmpty(userIpAddress) ? userIpAddress : ""; // This key-value pair can be used to track the user's IP address.
+
             if (VWOClient != null)
             {
 
@@ -92,6 +101,16 @@ namespace VWOSdk.DemoApp.Controllers
             string CampaignKey = VWOConfig.FeatureRolloutData.CampaignKey;
             string campaignType = "Feature-rollout";
             bool activateResponse = false;
+
+            // Get the user agent and IP address from the HTTP request
+            var httpRequest = HttpContext.Request;
+            string userAgent = httpRequest.Headers["User-Agent"]; // This is the user agent string of the client's browser.
+            string userIpAddress = httpRequest.HttpContext.Connection.RemoteIpAddress?.ToString(); // This is the IP address of the client's computer.
+            
+            // Add the user agent and IP address to the Options dictionary
+            options["visitorUserAgent"] = !string.IsNullOrEmpty(userAgent) ? userAgent : ""; // This key-value pair will be used to track the user's browser.
+            options["visitorIp"] = !string.IsNullOrEmpty(userIpAddress) ? userIpAddress : ""; // This key-value pair can be used to track the user's IP address.
+
             if (VWOClient != null)
             {
                 activateResponse = VWOClient.IsFeatureEnabled(CampaignKey, userId, options);
@@ -105,6 +124,16 @@ namespace VWOSdk.DemoApp.Controllers
         {
             var userId = string.IsNullOrEmpty(user) ? GetRandomName() : user;
             var options = VWOConfig.FeatureTestData.Options;
+            
+            // Get the user agent and IP address from the HTTP request
+            var httpRequest = HttpContext.Request;
+            string userAgent = httpRequest.Headers["User-Agent"]; // This is the user agent string of the client's browser.
+            string userIpAddress = httpRequest.HttpContext.Connection.RemoteIpAddress?.ToString(); // This is the IP address of the client's computer.
+            
+            // Add the user agent and IP address to the Options dictionary
+            options["visitorUserAgent"] = !string.IsNullOrEmpty(userAgent) ? userAgent : ""; // This key-value pair will be used to track the user's browser.
+            options["visitorIp"] = !string.IsNullOrEmpty(userIpAddress) ? userIpAddress : ""; // This key-value pair can be used to track the user's IP address.
+
             string stringVariableKey = VWOConfig.FeatureTestData.StringVariableKey;
             string integerVariableKey = VWOConfig.FeatureTestData.IntegerVariableKey;
             string booleanVariableKey = VWOConfig.FeatureTestData.BooleanVariableKey;
